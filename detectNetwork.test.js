@@ -138,7 +138,7 @@ describe('Discover', function() {
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
   var expect = chai.expect;
-  var prefix = ['6011', '644', '645', '646', '647', '648', '649', '65'];
+  var prefix = ['6011', '65'];
   var lengths = [16, 19];
   var nineteen = '1122334455667788990';
   for (var p = 0; p < prefix.length; p++) { 
@@ -147,9 +147,22 @@ describe('Discover', function() {
       it('has a prefix of ' + prefix[p] + ' and a length of ' + lengths[l], function() {
         expect(detectNetwork(cardNum)).to.equal('Discover');
       });
-    }
+    }  
   }
+  
+  for (var prefixes = 644; prefixes <= 649; prefix++) {
+    (function(prefixes) {
+      it('has a prefix of ' + prefixes + ' and a length of 16', function() {
+        detectNetwork(prefixes.toString + '1234567890123').should.equal('Discover');
+      });
+      it('has a prefix of ' + prefixes + ' and a length of 19', function() {
+        detectNetwork(prefixes.toString() + '1234567890123456').should.equal('Discover');
+      });
+    }  
+  )}
 });
+
+
 
 describe('Maestro', function() {
   // Write full test coverage for the Maestro card
