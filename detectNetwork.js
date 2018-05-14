@@ -20,7 +20,7 @@ var detectNetwork = function(cardNumber) {
   if (cardNumber.startsWith('4') && (cardNumber.length === 13 || cardNumber.length === 16 || cardNumber.length === 19)){
     return "Visa";
   }
-  if ((cardNumber.startsWith('51') || cardNumber.startsWith('52') || cardNumber.startsWith('53') || cardNumber.startsWith('54') || cardNumber.startsWith('55')) && (cardNumber.length === 16){
+  if ((cardNumber.startsWith('51') || cardNumber.startsWith('52') || cardNumber.startsWith('53') || cardNumber.startsWith('54') || cardNumber.startsWith('55')) && cardNumber.length === 16){
     return "Mastercard";
   } 
   // Once you've read this, go ahead and try to implement this function, then return to the console.
