@@ -50,7 +50,7 @@ describe('Diner\'s Club', function() {
   });
 
   it('has a prefix of 39 and a length of 14', function() {
-    detectNetwork('3934567890123').should.equal('Diner\'s Club');
+    detectNetwork('39345678901234').should.equal('Diner\'s Club');
   });
 });
 
@@ -130,20 +130,43 @@ describe('MasterCard', function() {
  
   it('has a prefix of 55 and a length of 16', function() {
     detectNetwork('5512345678901234').should.equal('MasterCard');
-  })
+  });
  
 });
 
 describe('Discover', function() {
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
-  it('has a prefix of 6011 and a length of 16');
-  it('has a prefix of 6011 and a length of 19');
+  var expect = chai.expect;
+  var prefix = ['6011', '644', '645', '646', '647', '648', '649', '65'];
+  var lengths = [16, 19];
+  var nineteen = '1122334455667788990';
+  for (var p = 0; p < prefix.length; p++) { 
+    for (var l = 0; l < lengths.length; l++) {
+      var cardNum = prefix[p] + nineteen.substring(0, lengths[l] - prefix[p].length);
+      it('has a prefix of ' + prefix[p] + ' and a length of ' + lengths[l], function() {
+        expect(detectNetwork(cardNum)).to.equal('Discover');
+      });
+    }
+  }
 });
 
 describe('Maestro', function() {
   // Write full test coverage for the Maestro card
+  var should  = chai.should();
+  var prefix = ['5018', '5020', '5038', '6304'];
+  var lengths = [12, 13, 14, 15, 16, 17, 18, 19];
+  var nineteen = '0099887766554433221';
+  for (var p = 0; p < prefix.length; p++) { 
+    for (var l = 0; l < lengths.length; l++) {
+      var cardNum = prefix[p] + nineteen.substring(0, lengths[l] - prefix[p].length);
+      it('has a prefix of ' + prefix[p] + ' and a length of ' + lengths[l], function() {
+        detectNetwork(cardNum).should.equal('Maestro');
+      });
+    }
+  }
 });
+
 
 describe('should support China UnionPay')
 describe('should support Switch')
