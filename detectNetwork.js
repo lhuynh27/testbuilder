@@ -15,13 +15,13 @@ var detectNetwork = function(cardNumber) {
     return "Diner's Club";
   }
   if ((cardNumber.startsWith('34') || cardNumber.startsWith('37')) && cardNumber.length === 15){
-      return "American Express";
+     return "American Express";
   }
   if (cardNumber.startsWith('4') && (cardNumber.length === 13 || cardNumber.length === 16 || cardNumber.length === 19)){
     return "Visa";
   }
   if ((cardNumber.startsWith('51') || cardNumber.startsWith('52') || cardNumber.startsWith('53') || cardNumber.startsWith('54') || cardNumber.startsWith('55')) && cardNumber.length === 16){
-    return "Mastercard";
+    return "MasterCard";
   } 
   // Once you've read this, go ahead and try to implement this function, then return to the console.
 };
